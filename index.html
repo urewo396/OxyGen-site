@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OxyGen | The Future of CCU</title>
+    <meta name="description"
+        content="OxyGen transforms atmospheric CO2 into solid graphite using proprietary reaction cycles.">
+
+    <style>
+        :root {
+            --primary-green: #1a5e3a;
+            --dark-green: #0a2113;
+            --accent-green: #2ecc71;
+            --bg-white: #ffffff;
+            --bg-light: #f8fcf9;
+            --text-dark: #111111;
+            --text-grey: #555555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- SCROLL REVEAL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 33, 19, 0.7), rgba(10, 33, 19, 0.8)), url('https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+        }
+
+        .brand-container {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            min-height: 1.2em;
+        }
+
+        /* The proper cursor from V8 */
+        .cursor {
+            display: inline-block;
+            width: 5px;
+            height: 0.8em;
+            background-color: var(--accent-green);
+            margin-left: 5px;
+            box-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .blinking {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .sub-hero {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: var(--accent-green);
+            color: var(--dark-green);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: white;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 8rem 10%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            letter-spacing: -1px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(26, 94, 58, 0.1);
+            color: var(--primary-green);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- SCIENCE CARDS (SUBTLE 3D TILT) --- */
+        .science-section {
+            background-color: var(--bg-light);
+            text-align: center;
+            perspective: 1000px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .card {
+            padding: 3rem 2rem;
+            background: white;
+            border-top: 4px solid var(--primary-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            transition: transform 0.1s ease-out, box-shadow 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        /* Only fallback hover if JS is disabled */
+        .card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            transform: translateZ(20px);
+        }
+
+        .card p {
+            color: var(--text-grey);
+            line-height: 1.6;
+            transform: translateZ(10px);
+        }
+
+        /* --- INTERACTIVE PROCESS FLOW --- */
+        .process-section {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 8rem 5%;
+            text-align: center;
+        }
+
+        .process-section h2 {
+            color: white;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+        }
+
+        .process-pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .process-node {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            width: 220px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+        }
+
+        /* Node Interactivity */
+        .process-node:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-green);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.15);
+        }
+
+        .process-node h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .process-node p {
+            font-size: 0.9rem;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        .process-node:hover h4 {
+            color: var(--accent-green);
+        }
+
+        .process-node:hover p {
+            color: white;
+        }
+
+        /* The Reactor gets a special base glow */
+        .reactor-node {
+            border-color: rgba(46, 204, 113, 0.4);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.05);
+        }
+
+        .process-line {
+            height: 2px;
+            width: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-dot {
+            position: absolute;
+            top: -3px;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: flowRight 2.5s infinite linear;
+        }
+
+        /* Speed up the flow when hovering anywhere in the pipeline */
+        .process-pipeline:hover .process-dot {
+            animation-duration: 1.2s;
+        }
+
+        .split-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .split-line {
+            width: 50px;
+        }
+
+        @keyframes flowRight {
+            0% {
+                left: -10px;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* --- MARKET / WHY GRAPHITE --- */
+        .market-section {
+            background: white;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .market-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .market-content p {
+            color: var(--text-grey);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .stat-box {
+            background: var(--dark-green);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- ROADMAP --- */
+        .roadmap-section {
+            background: var(--bg-light);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #ddd;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding: 0 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            top: 0;
+            border: 4px solid white;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        .timeline-date {
+            color: var(--primary-green);
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- CALCULATOR --- */
+        .calculator-section {
+            background: var(--primary-green);
+            color: white;
+            text-align: center;
+        }
+
+        .calc-wrapper {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .slider-container {
+            width: 100%;
+            margin: 2rem 0;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-green);
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-box h4 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-box span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CONTACT --- */
+        .contact-section {
+            background: white;
+            padding: 6rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-box {
+            padding: 3rem;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #f8fcf9;
+            border: 1px solid #eee;
+        }
+
+        .box-dark {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+        }
+
+        .input-group {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .waitlist-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            outline: none;
+        }
+
+        .waitlist-btn {
+            padding: 0 1.5rem;
+            background: var(--text-dark);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .waitlist-btn:hover {
+            background: var(--primary-green);
+        }
+
+        .btn-solvearn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            color: var(--dark-green);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-solvearn:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-email {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-grey);
+            font-size: 0.9rem;
+            background-color: #f4f4f4;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 900px) {
+            .process-pipeline {
+                flex-direction: column;
+            }
+
+            .process-line {
+                width: 2px;
+                height: 40px;
+            }
+
+            .split-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .split-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .split-line {
+                width: 2px;
+                height: 30px;
+            }
+
+            @keyframes flowRight {
+                0% {
+                    top: -10px;
+                    left: -3px;
+                    opacity: 0;
+                }
+
+                10% {
+                    opacity: 1;
+                }
+
+                90% {
+                    opacity: 1;
+                }
+
+                100% {
+                    top: 100%;
+                    left: -3px;
+                    opacity: 0;
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-container {
+                font-size: 2.5rem;
+            }
+
+            .market-grid,
+            .contact-grid,
+            .grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                background-attachment: scroll;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                text-align: left !important;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-dot {
+                left: 11px !important;
+            }
+
+            .card {
+                transform: none !important;
+            }
+
+            /* Disable tilt on mobile */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">OxyGen</div>
+        <div class="nav-links">
+            <a href="#science">Technology</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="vision">
+        <div class="brand-container" id="typing-container"></div>
+        <p class="sub-hero">
+            Turning atmospheric threats into solid opportunity. <br>
+            The next generation of Carbon Capture & Utilization.
+        </p>
+        <a href="#science" class="cta-button">See The Vision</a>
+    </section>
+
+    <section class="science-section reveal" id="science">
+        <div class="badge">Academic Partnership</div>
+        <div class="section-header">
+            <h2>Backed by Rigorous Research</h2>
+            <p>OxyGen is an engineered solution supported by research partners at the <strong>Silesian University of
+                    Technology</strong>. We bridge the gap between theoretical thermodynamics and real-world
+                application.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card reveal tilt-card">
+                <h3>01. Extract</h3>
+                <p>Utilizing next-gen Direct Air Capture to pull CO2 straight from the sky. We target emissions at the
+                    source or from ambient air.</p>
+            </div>
+            <div class="card reveal tilt-card">
+                <h3>02. Convert</h3>
+                <p>Thermal reactions break molecular bonds. Carbon is separated, and pure Oxygen is released back into
+                    the environment.</p>
+            </div>
+            <div class="card reveal tilt-card">
+                <h3>03. Solidify</h3>
+                <p>The captured carbon is mineralized into graphite—a stable, profitable material essential for the
+                    battery industry.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section reveal">
+        <h2>The OxyGen Cycle</h2>
+        <div class="process-pipeline">
+
+            <div class="process-node">
+                <h4>Atmospheric Air</h4>
+                <p>Ambient air containing CO2</p>
+            </div>
+
+            <div class="process-line">
+                <div class="process-dot" style="background: #ccc; box-shadow: 0 0 10px #ccc;"></div>
+            </div>
+
+            <div class="process-node">
+                <h4>Extraction Unit</h4>
+                <p>Isolating pure CO2 from the environment</p>
+            </div>
+
+            <div class="process-line">
+                <div class="process-dot" style="animation-delay: 0.5s;"></div>
+                <div class="process-dot" style="animation-delay: 1.5s;"></div>
+            </div>
+
+            <div class="process-node reactor-node">
+                <h4>Proprietary Reactor</h4>
+                <p>High-efficiency conversion cycle splits molecular bonds</p>
+            </div>
+
+            <div class="split-wrapper" style="display: flex; align-items: center;">
+                <div class="split-container">
+
+                    <div style="display: flex; align-items: center;">
+                        <div class="process-line split-line">
+                            <div class="process-dot"
+                                style="background: #3498db; box-shadow: 0 0 10px #3498db; animation-delay: 0.2s;"></div>
+                        </div>
+                        <div class="process-node" style="width: 170px; padding: 1.5rem;">
+                            <h4 style="color: #3498db; margin:0;">Clean Oxygen</h4>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center;">
+                        <div class="process-line split-line">
+                            <div class="process-dot"
+                                style="background: #aaa; box-shadow: 0 0 10px #aaa; animation-delay: 0.8s;"></div>
+                        </div>
+                        <div class="process-node" style="width: 170px; padding: 1.5rem;">
+                            <h4 style="color: #aaa; margin:0;">Solid Graphite</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="market-section reveal" id="market">
+        <div class="market-grid">
+            <div>
+                <div class="badge">The Opportunity</div>
+                <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Why Graphite?</h3>
+                <p style="color: var(--text-grey); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    The world is shifting to Electric Vehicles, but the battery supply chain is dirty.
+                    An EV battery contains more Graphite than Lithium.
+                </p>
+                <p style="color: var(--text-grey); line-height: 1.8; font-size: 1.1rem;">
+                    Current graphite mining is carbon-intensive. OxyGen flips the script:
+                    we create <strong>Carbon-Negative Graphite</strong> by pulling the raw material directly from the
+                    air.
+                    It's not just a product; it's a solution to the battery bottleneck.
+                </p>
+            </div>
+            <div class="stat-box reveal">
+                <span class="stat-number">50 kg</span>
+                <span class="stat-label">Graphite needed per EV Battery</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="roadmap-section reveal" id="roadmap">
+        <div class="section-header">
+            <h2>The Path Forward</h2>
+            <p>From university theory to global deployment.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2025</div>
+                <div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Concept & Theory</h4>
+                    <p style="color: var(--text-grey); font-size: 0.95rem;">Validation of proprietary reaction cycles.
+                        Partnership with Silesian University of Technology.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2026</div>
+                <div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Prototype V1</h4>
+                    <p style="color: var(--text-grey); font-size: 0.95rem;">Construction of the first functional unit.
+                        IP Protection strategy and efficiency testing.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2027</div>
+                <div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Pilot Deployment</h4>
+                    <p style="color: var(--text-grey); font-size: 0.95rem;">Scaling to a commercial system. Field
+                        testing in industrial zones for maximum capture efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-section reveal" id="impact">
+        <h2 style="margin-bottom: 1rem">Calculate The Impact</h2>
+        <p style="opacity: 0.8; margin-bottom: 2rem">See what happens when we scale.</p>
+        <div class="calc-wrapper">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                <span>Scale of Deployment</span>
+                <span id="unit-display" style="font-weight: bold; color: var(--accent-green)">1 Unit</span>
+            </div>
+            <div class="slider-container">
+                <input type="range" min="1" max="1000000" value="1" id="unit-slider">
+            </div>
+            <div class="results-grid">
+                <div class="result-box">
+                    <h4 id="co2-result">271 KG</h4>
+                    <span>CO2 Removed / Year</span>
+                </div>
+                <div class="result-box">
+                    <h4 id="graphite-result">74 KG</h4>
+                    <span>Graphite Created / Year</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section reveal" id="contact">
+        <div class="section-header">
+            <h2>Get Involved</h2>
+            <p>Whether you are an observer or a partner, join us.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-box">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Join the Waitlist</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">Be the first to see the prototype in
+                    action and receive quarterly research updates.</p>
+                <div class="input-group" id="form-container">
+                    <input type="email" class="waitlist-input" placeholder="Your Email" id="email-input">
+                    <button class="waitlist-btn" onclick="submitForm()">Join</button>
+                </div>
+                <p id="success-message"
+                    style="display: none; color: var(--primary-green); margin-top: 1rem; font-weight: 600;">
+                    Welcome to the future.
+                </p>
+            </div>
+            <div class="contact-box box-dark">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Work With Us</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">We are looking for visionary engineers
+                    and investors to accelerate the transition to green graphite.</p>
+                <a href="https://www.solvearn.net/app/company/10002528-oxygen-the-artificial-trees/home" target="_blank"
+                    class="btn-solvearn">
+                    Connect on Solvearn
+                </a>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="mailto:maks08@protonmail.com" class="link-email">maks08@protonmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 OxyGen Project. Katowice, Poland.</p>
+    </footer>
+
+    <script>
+        /* --- SCROLL REVEAL OBSERVER --- */
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+
+        /* --- V8 TYPING ANIMATION (RESTORED PERFECTLY) --- */
+        const container = document.getElementById('typing-container');
+        const prefix = "Oxy"; const suffix = "Gen"; const midInsert = "gen"; const endInsert = "eration";
+        const typeSpeed = 100; const pauseTime = 2000; const arrowSpeed = 150;
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+        function render(left, right, cursorBlinking = false) {
+            const cursorClass = cursorBlinking ? "cursor blinking" : "cursor";
+            container.innerHTML = `${left}<span class="${cursorClass}"></span>${right}`;
+        }
+
+        async function startTypingLoop() {
+            while (true) {
+                render(prefix, suffix, true); await sleep(1500);
+                for (let i = 1; i <= midInsert.length; i++) {
+                    render(prefix + midInsert.substring(0, i), suffix, false); await sleep(typeSpeed);
+                }
+                render(prefix + midInsert, suffix, true); await sleep(400);
+                let fullRight = suffix; let leftBase = prefix + midInsert;
+                for (let i = 1; i <= fullRight.length; i++) {
+                    render(leftBase + fullRight.substring(0, i), fullRight.substring(i), true); await sleep(arrowSpeed);
+                }
+                await sleep(200);
+                let base = prefix + midInsert + suffix;
+                for (let i = 1; i <= endInsert.length; i++) {
+                    render(base + endInsert.substring(0, i), "", false); await sleep(typeSpeed);
+                }
+                render(base + endInsert, "", true); await sleep(pauseTime);
+                for (let i = endInsert.length; i >= 0; i--) {
+                    render(base + endInsert.substring(0, i), "", false); await sleep(typeSpeed);
+                }
+                render(base, "", true); await sleep(400);
+                let currentLeft = base; let currentRight = "";
+                for (let i = 0; i < suffix.length; i++) {
+                    let charMoved = currentLeft.slice(-1); currentLeft = currentLeft.slice(0, -1);
+                    currentRight = charMoved + currentRight;
+                    render(currentLeft, currentRight, true); await sleep(arrowSpeed);
+                }
+                await sleep(400);
+                for (let i = midInsert.length; i >= 0; i--) {
+                    render(prefix + midInsert.substring(0, i), suffix, false); await sleep(typeSpeed);
+                }
+            }
+        }
+        startTypingLoop();
+
+        /* --- SUBTLE 3D CARD TILT LOGIC --- */
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                // Only run on desktop
+                if (window.innerWidth <= 768) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                // Very subtle rotation (max 4 degrees)
+                const rotateX = ((y - centerY) / centerY) * -4;
+                const rotateY = ((x - centerX) / centerX) * 4;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
+
+        /* --- CALCULATOR LOGIC --- */
+        const slider = document.getElementById('unit-slider');
+        const display = document.getElementById('unit-display');
+        const co2Res = document.getElementById('co2-result');
+        const graphRes = document.getElementById('graphite-result');
+        const CO2_PER_UNIT = 271.56, GRAPH_PER_UNIT = 74.06;
+
+        function formatMass(kg) {
+            if (kg >= 1000000000) return (kg / 1000000000).toFixed(2) + "M Tonnes";
+            if (kg >= 1000000) return (kg / 1000000).toFixed(1) + "k Tonnes";
+            if (kg >= 1000) return (kg / 1000).toFixed(1) + " Tonnes";
+            return Math.floor(kg) + " KG";
+        }
+
+        slider.addEventListener('input', (e) => {
+            let units = parseInt(e.target.value);
+            display.innerText = (units >= 1000000 ? (units / 1000000).toFixed(1) + " Million" : (units >= 1000 ? (units / 1000).toFixed(1) + "k" : units)) + (units == 1 ? " Unit" : " Units");
+            co2Res.innerText = formatMass(units * CO2_PER_UNIT);
+            graphRes.innerText = formatMass(units * GRAPH_PER_UNIT);
+        });
+
+        /* --- FORM --- */
+        function submitForm() {
+            const email = document.getElementById('email-input').value;
+            if (email && email.includes('@')) {
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+            } else alert("Please enter a valid email.");
+        }
+    </script>
+</body>
+
+</html>
