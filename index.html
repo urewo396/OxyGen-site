@@ -6,18 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OxyGen | The Future of CCU</title>
     <meta name="description"
-        content="OxyGen transforms atmospheric CO2 into solid graphite using proprietary reaction cycles. The future of Carbon Capture & Utilization.">
-    <meta property="og:title" content="OxyGen | Mining the Sky">
-    <meta property="og:description"
-        content="Turning 31g/h of CO2 into Graphite. Backed by science. Join the revolution.">
-    <meta property="og:image"
-        content="https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80">
-    <meta property="og:url" content="https://oxygen-project.com">
-    <meta name="twitter:card" content="summary_large_image">
+        content="OxyGen transforms atmospheric CO2 into solid graphite using proprietary reaction cycles.">
+
+    <link rel="icon" type="image/png" href="logo.png">
+
     <style>
         :root {
             --primary-green: #1a5e3a;
-            --dark-green: #0d3b22;
+            --dark-green: #0a2113;
             --accent-green: #2ecc71;
             --bg-white: #ffffff;
             --bg-light: #f8fcf9;
@@ -39,11 +35,11 @@
             overflow-x: hidden;
         }
 
-        /* --- ANIMATIONS (SCROLL REVEAL) --- */
+        /* --- SCROLL REVEAL --- */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -68,7 +64,6 @@
             font-size: 1.5rem;
             color: white;
             letter-spacing: -1px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .nav-links a {
@@ -78,7 +73,6 @@
             font-size: 0.9rem;
             font-weight: 500;
             transition: opacity 0.3s;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .nav-links a:hover {
@@ -93,24 +87,22 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                url('https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(rgba(10, 33, 19, 0.5), rgba(10, 33, 19, 0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: white;
+            position: relative;
         }
 
         .brand-container {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            min-height: 1.2em;
+            margin-bottom: 1rem;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            min-height: 1.2em;
         }
 
         .cursor {
@@ -139,34 +131,34 @@
         }
 
         .sub-hero {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.95);
-            max-width: 600px;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 3rem;
             font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .cta-button {
-            padding: 1rem 3rem;
-            background-color: var(--accent-green);
-            color: var(--primary-green);
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: var(--accent-green);
+            color: var(--dark-green);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
             transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            background-color: white;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            background: white;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
 
         /* --- SECTIONS GENERAL --- */
         section {
-            padding: 6rem 10%;
+            padding: 8rem 10%;
         }
 
         .section-header {
@@ -175,15 +167,16 @@
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             color: var(--text-dark);
+            letter-spacing: -1px;
         }
 
         .section-header p {
             color: var(--text-grey);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -194,22 +187,56 @@
             color: var(--primary-green);
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 1.5rem;
-            text-transform: uppercase;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* --- THE SCIENCE --- */
+        /* --- SCIENCE CARDS --- */
         .science-section {
             background-color: var(--bg-light);
             text-align: center;
+            perspective: 1000px;
         }
 
-        /* --- INTERACTIVE PHYSICS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .card {
+            padding: 3rem 2rem;
+            background: white;
+            border-top: 4px solid var(--primary-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            transition: transform 0.1s ease-out, box-shadow 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            transform: translateZ(20px);
+        }
+
+        .card p {
+            color: var(--text-grey);
+            line-height: 1.6;
+            transform: translateZ(10px);
+        }
+
+        /* --- INTERACTIVE PHYSICS CANVAS --- */
         .interactive-container {
             padding: 0;
-            height: 60vh;
+            height: 65vh;
             background: #111;
             position: relative;
             display: flex;
@@ -238,11 +265,15 @@
         }
 
         .interactive-text h3 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: -webkit-linear-gradient(white, #aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .interactive-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
         }
 
         /* --- MARKET / WHY GRAPHITE --- */
@@ -253,77 +284,73 @@
         .market-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
 
+        .market-content {
+            padding-right: 2rem;
+        }
+
         .market-content h3 {
-            font-size: 2rem;
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
             color: var(--text-dark);
+            letter-spacing: -1.5px;
+            font-weight: 800;
         }
 
         .market-content p {
             color: var(--text-grey);
             line-height: 1.8;
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            font-weight: 400;
         }
 
-        .stat-box {
+        .market-visual {
+            position: relative;
+            width: 100%;
+        }
+
+        .market-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-box-floating {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
             background: var(--dark-green);
             color: white;
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(13, 59, 34, 0.2);
+            box-shadow: 0 20px 40px rgba(10, 33, 19, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .stat-number {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--accent-green);
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+            line-height: 1;
         }
 
         .stat-label {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* --- PROCESS GRID --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .card {
-            padding: 2.5rem;
-            background: white;
-            border-top: 4px solid var(--primary-green);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-            border-radius: 8px;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .card p {
-            color: var(--text-grey);
-            line-height: 1.6;
-        }
-
-        /* --- ROADMAP --- */
+        /* --- ROADMAP (CLEAN & STATIC) --- */
         .roadmap-section {
             background: var(--bg-light);
         }
@@ -387,14 +414,26 @@
             margin-bottom: 0.5rem;
         }
 
-        .timeline-content h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        /* --- VISUAL BANNER --- */
+        .visual-banner {
+            padding: 0;
+            height: 40vh;
+            background: linear-gradient(rgba(26, 94, 58, 0.6), rgba(10, 33, 19, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        .timeline-content p {
-            font-size: 0.95rem;
-            color: var(--text-grey);
+        .visual-banner h2 {
+            color: white;
+            font-size: 3.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 0 20px;
         }
 
         /* --- CALCULATOR --- */
@@ -405,37 +444,46 @@
         }
 
         .calc-wrapper {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            padding: 3rem;
+            padding: 4rem;
             border-radius: 20px;
             max-width: 800px;
             margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
 
         .slider-container {
             width: 100%;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
+            position: relative;
         }
 
         input[type=range] {
             width: 100%;
             height: 8px;
-            background: rgba(0, 0, 0, 0.3);
             border-radius: 5px;
             outline: none;
             -webkit-appearance: none;
+            background: linear-gradient(to right, var(--accent-green) 0%, rgba(255, 255, 255, 0.2) 0%);
+            transition: background 0.1s;
         }
 
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 25px;
-            height: 25px;
-            background: var(--accent-green);
+            width: 28px;
+            height: 28px;
+            background: white;
+            border: 4px solid var(--accent-green);
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+            transition: transform 0.1s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
         }
 
         .results-grid {
@@ -446,9 +494,10 @@
         }
 
         .result-box h4 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .result-box span {
@@ -458,10 +507,10 @@
             letter-spacing: 1px;
         }
 
-        /* --- CONTACT SECTION --- */
+        /* --- CONTACT --- */
         .contact-section {
-            padding: 6rem 5%;
             background: white;
+            padding: 8rem 5%;
         }
 
         .contact-grid {
@@ -475,13 +524,9 @@
         .contact-box {
             padding: 3rem;
             border-radius: 20px;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-
-        .box-light {
             background: #f8fcf9;
             border: 1px solid #eee;
         }
@@ -489,17 +534,7 @@
         .box-dark {
             background: var(--dark-green);
             color: white;
-        }
-
-        .contact-box h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-box p {
-            margin-bottom: 2rem;
-            opacity: 0.8;
-            line-height: 1.6;
+            border: none;
         }
 
         .input-group {
@@ -530,7 +565,7 @@
             background: var(--primary-green);
         }
 
-        .btn-solvearn {
+        .btn-wellfound {
             display: inline-block;
             width: 100%;
             text-align: center;
@@ -544,7 +579,7 @@
             transition: transform 0.2s;
         }
 
-        .btn-solvearn:hover {
+        .btn-wellfound:hover {
             transform: translateY(-2px);
         }
 
@@ -552,7 +587,7 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.9rem;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
 
         .link-email:hover {
@@ -580,7 +615,26 @@
                 grid-template-columns: 1fr;
             }
 
-            .hero {
+            .market-grid {
+                gap: 3rem;
+            }
+
+            .market-content {
+                padding-right: 0;
+            }
+
+            .stat-box-floating {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                margin-top: -50px;
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero,
+            .visual-banner {
                 background-attachment: scroll;
             }
 
@@ -591,8 +645,8 @@
             .timeline-item {
                 width: 100%;
                 padding-left: 50px;
-                padding-right: 0;
                 text-align: left !important;
+                padding-right: 0;
             }
 
             .timeline-item:nth-child(odd),
@@ -602,6 +656,14 @@
 
             .timeline-dot {
                 left: 11px !important;
+            }
+
+            .card {
+                transform: none !important;
+            }
+
+            .visual-banner h2 {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -613,7 +675,7 @@
         <div class="logo">OxyGen</div>
         <div class="nav-links">
             <a href="#science">Technology</a>
-            <a href="#roadmap">Roadmap</a>
+            <a href="#market">Opportunity</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
@@ -631,27 +693,25 @@
         <div class="badge">Academic Partnership</div>
         <div class="section-header">
             <h2>Backed by Rigorous Research</h2>
-            <p>
-                OxyGen is an engineered solution supported by research partners at the
-                <strong>Silesian University of Technology</strong>. We bridge the gap between theoretical thermodynamics
-                and real-world application.
-            </p>
+            <p>OxyGen is an engineered solution supported by research partners at the <strong>Silesian University of
+                    Technology</strong>. We bridge the gap between theoretical thermodynamics and real-world
+                application.</p>
         </div>
 
         <div class="grid">
-            <div class="card reveal">
+            <div class="card reveal tilt-card">
                 <h3>01. Extract</h3>
                 <p>Utilizing next-gen Direct Air Capture to pull CO2 straight from the sky. We target emissions at the
                     source or from ambient air.</p>
             </div>
-            <div class="card reveal">
+            <div class="card reveal tilt-card">
                 <h3>02. Convert</h3>
                 <p>Thermal reactions break molecular bonds. Carbon is separated, and pure Oxygen is released back into
                     the environment.</p>
             </div>
-            <div class="card reveal">
+            <div class="card reveal tilt-card">
                 <h3>03. Solidify</h3>
-                <p>The captured carbon is mineralized into graphite—a stable, profitable material essential for the
+                <p>The captured carbon is mineralized into graphite-a stable, profitable material essential for the
                     battery industry.</p>
             </div>
         </div>
@@ -660,7 +720,7 @@
     <section class="interactive-container">
         <div class="interactive-text">
             <h3>From Gas to Solid.</h3>
-            <p>Hover to interact. We organize chaotic CO2 molecules into stable Graphite structures.</p>
+            <p>Hover to interact. We organize chaotic atmospheric CO2 into stable Graphite structures.</p>
         </div>
         <canvas id="particleCanvas"></canvas>
     </section>
@@ -672,18 +732,23 @@
                 <h3>Why Graphite?</h3>
                 <p>
                     The world is shifting to Electric Vehicles, but the battery supply chain is dirty.
-                    An EV battery contains more Graphite than Lithium.
+                    An EV battery contains significantly more Graphite than Lithium.
                 </p>
                 <p>
-                    Current graphite mining is carbon-intensive. OxyGen flips the script:
+                    Current graphite mining is highly carbon-intensive and vulnerable to supply shocks. OxyGen flips the
+                    script:
                     we create <strong>Carbon-Negative Graphite</strong> by pulling the raw material directly from the
                     air.
                     It's not just a product; it's a solution to the battery bottleneck.
                 </p>
             </div>
-            <div class="stat-box reveal">
-                <span class="stat-number">50 kg</span>
-                <span class="stat-label">Graphite needed per EV Battery</span>
+            <div class="market-visual reveal">
+                <img src="https://images.unsplash.com/photo-1584351583369-6baf055b51a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80"
+                    alt="Dark Graphite Texture" class="market-img">
+                <div class="stat-box-floating">
+                    <span class="stat-number">50 kg</span>
+                    <span class="stat-label">Graphite needed per EV Battery</span>
+                </div>
             </div>
         </div>
     </section>
@@ -697,30 +762,35 @@
             <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2025</div>
-                <div class="timeline-content">
-                    <h4>Concept & Theory</h4>
-                    <p>Validation of proprietary reaction cycles. Partnership with Silesian University
-                        of Technology.</p>
+                <div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Concept & Theory</h4>
+                    <p style="color: var(--text-grey); font-size: 0.95rem;">Validation of proprietary reaction cycles.
+                        Partnership with Silesian University of Technology.</p>
                 </div>
             </div>
             <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2026</div>
-                <div class="timeline-content">
-                    <h4>Prototype V1</h4>
-                    <p>Construction of the first 31g/h functional unit. IP Protection strategy and efficiency testing.
-                    </p>
+                <div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Prototype V1</h4>
+                    <p style="color: var(--text-grey); font-size: 0.95rem;">Construction of the first functional unit.
+                        IP Protection strategy and efficiency testing.</p>
                 </div>
             </div>
             <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2027</div>
-                <div class="timeline-content">
-                    <h4>Pilot Deployment</h4>
-                    <p>Scaling to a 10kW system. Field testing in industrial zones for maximum capture efficiency.</p>
+                <div>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Pilot Deployment</h4>
+                    <p style="color: var(--text-grey); font-size: 0.95rem;">Scaling to a commercial system. Field
+                        testing in industrial zones for maximum capture efficiency.</p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="visual-banner reveal">
+        <h2>We don't just reduce emissions.<br>We reverse them.</h2>
     </section>
 
     <section class="calculator-section reveal" id="impact">
@@ -728,12 +798,15 @@
         <p style="opacity: 0.8; margin-bottom: 2rem">See what happens when we scale.</p>
         <div class="calc-wrapper">
             <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                <span>Scale of Deployment</span>
-                <span id="unit-display" style="font-weight: bold; color: var(--accent-green)">1 Unit</span>
+                <span style="font-size: 1.1rem;">Scale of Deployment</span>
+                <span id="unit-display" style="font-weight: bold; color: var(--accent-green); font-size: 1.1rem;">1
+                    Unit</span>
             </div>
+
             <div class="slider-container">
                 <input type="range" min="1" max="1000000" value="1" id="unit-slider">
             </div>
+
             <div class="results-grid">
                 <div class="result-box">
                     <h4 id="co2-result">271 KG</h4>
@@ -752,11 +825,11 @@
             <h2>Get Involved</h2>
             <p>Whether you are an observer or a partner, join us.</p>
         </div>
-
         <div class="contact-grid">
-            <div class="contact-box box-light">
-                <h3>Join the Waitlist</h3>
-                <p>Be the first to see the prototype in action and receive quarterly research updates.</p>
+            <div class="contact-box">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Join the Waitlist</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">Be the first to see the prototype in
+                    action and receive quarterly research updates.</p>
                 <div class="input-group" id="form-container">
                     <input type="email" class="waitlist-input" placeholder="Your Email" id="email-input">
                     <button class="waitlist-btn" onclick="submitForm()">Join</button>
@@ -766,14 +839,12 @@
                     Welcome to the future.
                 </p>
             </div>
-
             <div class="contact-box box-dark">
-                <h3>Work With Us</h3>
-                <p>We are looking for visionary engineers and investors to accelerate the transition to green graphite.
-                </p>
-                <a href="https://www.solvearn.net/app/company/10002528-oxygen-the-artificial-trees/home" target="_blank"
-                    class="btn-solvearn">
-                    Connect on Solvearn
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Work With Us</h3>
+                <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">We are looking for visionary engineers
+                    and investors to accelerate the transition to green graphite.</p>
+                <a href="https://wellfound.com/company/oxygen-5" target="_blank" class="btn-wellfound">
+                    Connect on Wellfound
                 </a>
                 <div style="text-align: center; margin-top: 1rem;">
                     <a href="mailto:max@oxygencarbon.org" class="link-email">max@oxygencarbon.org</a>
@@ -783,8 +854,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 OxyGen Project.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">Katowice, Poland.</p>
+        <p>&copy; 2026 OxyGen Project. Katowice, Poland.</p>
     </footer>
 
     <script>
@@ -797,18 +867,12 @@
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
 
-        /* --- TYPING ANIMATION --- */
+        /* --- PERFECT TYPING ANIMATION --- */
         const container = document.getElementById('typing-container');
-        const prefix = "Oxy";
-        const suffix = "Gen";
-        const midInsert = "gen";
-        const endInsert = "eration";
-        const typeSpeed = 100;
-        const pauseTime = 2000;
-        const arrowSpeed = 150;
+        const prefix = "Oxy"; const suffix = "Gen"; const midInsert = "gen"; const endInsert = "eration";
+        const typeSpeed = 100; const pauseTime = 2000; const arrowSpeed = 150;
         const sleep = ms => new Promise(r => setTimeout(r, ms));
 
         function render(left, right, cursorBlinking = false) {
@@ -818,58 +882,64 @@
 
         async function startTypingLoop() {
             while (true) {
-                render(prefix, suffix, true);
-                await sleep(1500);
+                render(prefix, suffix, true); await sleep(1500);
                 for (let i = 1; i <= midInsert.length; i++) {
-                    render(prefix + midInsert.substring(0, i), suffix, false);
-                    await sleep(typeSpeed);
+                    render(prefix + midInsert.substring(0, i), suffix, false); await sleep(typeSpeed);
                 }
-                render(prefix + midInsert, suffix, true);
-                await sleep(400);
-                let fullRight = suffix;
-                let leftBase = prefix + midInsert;
+                render(prefix + midInsert, suffix, true); await sleep(400);
+                let fullRight = suffix; let leftBase = prefix + midInsert;
                 for (let i = 1; i <= fullRight.length; i++) {
-                    render(leftBase + fullRight.substring(0, i), fullRight.substring(i), true);
-                    await sleep(arrowSpeed);
+                    render(leftBase + fullRight.substring(0, i), fullRight.substring(i), true); await sleep(arrowSpeed);
                 }
                 await sleep(200);
                 let base = prefix + midInsert + suffix;
                 for (let i = 1; i <= endInsert.length; i++) {
-                    render(base + endInsert.substring(0, i), "", false);
-                    await sleep(typeSpeed);
+                    render(base + endInsert.substring(0, i), "", false); await sleep(typeSpeed);
                 }
-                render(base + endInsert, "", true);
-                await sleep(pauseTime);
+                render(base + endInsert, "", true); await sleep(pauseTime);
                 for (let i = endInsert.length; i >= 0; i--) {
-                    render(base + endInsert.substring(0, i), "", false);
-                    await sleep(typeSpeed);
+                    render(base + endInsert.substring(0, i), "", false); await sleep(typeSpeed);
                 }
-                render(base, "", true);
-                await sleep(400);
-                let currentLeft = base;
-                let currentRight = "";
+                render(base, "", true); await sleep(400);
+                let currentLeft = base; let currentRight = "";
                 for (let i = 0; i < suffix.length; i++) {
-                    let charMoved = currentLeft.slice(-1);
-                    currentLeft = currentLeft.slice(0, -1);
+                    let charMoved = currentLeft.slice(-1); currentLeft = currentLeft.slice(0, -1);
                     currentRight = charMoved + currentRight;
-                    render(currentLeft, currentRight, true);
-                    await sleep(arrowSpeed);
+                    render(currentLeft, currentRight, true); await sleep(arrowSpeed);
                 }
                 await sleep(400);
                 for (let i = midInsert.length; i >= 0; i--) {
-                    render(prefix + midInsert.substring(0, i), suffix, false);
-                    await sleep(typeSpeed);
+                    render(prefix + midInsert.substring(0, i), suffix, false); await sleep(typeSpeed);
                 }
             }
         }
         startTypingLoop();
 
-        /* --- INTERACTIVE PHYSICS --- */
+        /* --- SUBTLE 3D CARD TILT LOGIC --- */
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth <= 768) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -4;
+                const rotateY = ((x - centerX) / centerX) * 4;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
+        });
+
+        /* --- FULL SCREEN INTERACTIVE PHYSICS (GAS TO SOLID) --- */
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
-        let mouse = { x: -1000, y: -1000 };
+        let mouseX = -1000, mouseY = -1000;
         let isSolid = false;
 
         function resize() {
@@ -880,12 +950,12 @@
 
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
         });
 
         canvas.addEventListener('mouseenter', () => isSolid = true);
-        canvas.addEventListener('mouseleave', () => { isSolid = false; mouse.x = -1000; });
+        canvas.addEventListener('mouseleave', () => { isSolid = false; mouseX = -1000; });
 
         class Particle {
             constructor() {
@@ -898,8 +968,8 @@
                 this.tx = 0; this.ty = 0;
             }
             update() {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
+                let dx = mouseX - this.x;
+                let dy = mouseY - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
                 let forceDirectionX = dx / distance;
                 let forceDirectionY = dy / distance;
@@ -910,8 +980,8 @@
                 if (isSolid) {
                     let sx = this.tx - this.x;
                     let sy = this.ty - this.y;
-                    this.x += sx * 0.1;
-                    this.y += sy * 0.1;
+                    this.x += sx * 0.08;
+                    this.y += sy * 0.08;
                     if (distance < maxDistance) {
                         this.x -= forceDirectionX * force * 20;
                         this.y -= forceDirectionY * force * 20;
@@ -936,18 +1006,29 @@
 
         function initParticles() {
             particles = [];
-            let cols = 15; let rows = 10;
-            let spacing = 40;
-            let startX = (width - (cols * spacing)) / 2;
-            let startY = (height - (rows * spacing)) / 2;
-            for (let i = 0; i < 150; i++) {
+            // Dynamically calculate grid to cover the entire canvas
+            let spacing = 50;
+            let cols = Math.ceil(width / spacing);
+            let rows = Math.ceil(height / spacing);
+            let total = cols * rows;
+
+            // Performance cap for huge screens
+            if (total > 450) {
+                spacing = Math.sqrt((width * height) / 450);
+                cols = Math.ceil(width / spacing);
+                rows = Math.ceil(height / spacing);
+                total = cols * rows;
+            }
+
+            let startX = (width - (cols * spacing)) / 2 + (spacing / 2);
+            let startY = (height - (rows * spacing)) / 2 + (spacing / 2);
+
+            for (let i = 0; i < total; i++) {
                 let p = new Particle();
-                let col = i % cols; let row = Math.floor(i / cols);
-                if (row < rows) {
-                    p.tx = startX + col * spacing; p.ty = startY + row * spacing;
-                } else {
-                    p.tx = width / 2 + (Math.random() - 0.5) * 500; p.ty = height / 2 + (Math.random() - 0.5) * 500;
-                }
+                let col = i % cols;
+                let row = Math.floor(i / cols);
+                p.tx = startX + col * spacing;
+                p.ty = startY + row * spacing;
                 particles.push(p);
             }
         }
@@ -962,7 +1043,8 @@
                         let dx = particles[i].x - particles[j].x;
                         let dy = particles[i].y - particles[j].y;
                         let dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 50) {
+                        // Draw lines if they are neighbors in the grid
+                        if (dist < 70) {
                             ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                         }
@@ -976,19 +1058,12 @@
         window.addEventListener('resize', resize);
         resize(); animate();
 
-        /* --- CALCULATOR --- */
+        /* --- CALCULATOR LOGIC & DYNAMIC FILL --- */
         const slider = document.getElementById('unit-slider');
         const display = document.getElementById('unit-display');
         const co2Res = document.getElementById('co2-result');
         const graphRes = document.getElementById('graphite-result');
-        const CO2_PER_UNIT_YEAR = 271.56;
-        const GRAPH_PER_UNIT_YEAR = 74.06;
-
-        function formatNumber(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + " Million";
-            else if (num >= 1000) return (num / 1000).toFixed(1) + "k";
-            return num;
-        }
+        const CO2_PER_UNIT = 271.56, GRAPH_PER_UNIT = 74.06;
 
         function formatMass(kg) {
             if (kg >= 1000000000) return (kg / 1000000000).toFixed(2) + "M Tonnes";
@@ -997,23 +1072,33 @@
             return Math.floor(kg) + " KG";
         }
 
+        function updateSliderFill() {
+            const val = slider.value;
+            const min = slider.min ? slider.min : 1;
+            const max = slider.max ? slider.max : 1000000;
+            const percentage = ((val - min) / (max - min)) * 100;
+            slider.style.background = `linear-gradient(to right, var(--accent-green) ${percentage}%, rgba(255,255,255,0.2) ${percentage}%)`;
+        }
+
         slider.addEventListener('input', (e) => {
             let units = parseInt(e.target.value);
-            display.innerText = formatNumber(units) + (units == 1 ? " Unit" : " Units");
-            co2Res.innerText = formatMass(units * CO2_PER_UNIT_YEAR);
-            graphRes.innerText = formatMass(units * GRAPH_PER_UNIT_YEAR);
+            display.innerText = (units >= 1000000 ? (units / 1000000).toFixed(1) + " Million" : (units >= 1000 ? (units / 1000).toFixed(1) + "k" : units)) + (units == 1 ? " Unit" : " Units");
+            co2Res.innerText = formatMass(units * CO2_PER_UNIT);
+            graphRes.innerText = formatMass(units * GRAPH_PER_UNIT);
+            updateSliderFill();
         });
 
-        /* --- FORM SUBMIT --- */
+        updateSliderFill();
+
+        /* --- FORM --- */
         function submitForm() {
             const email = document.getElementById('email-input').value;
             if (email && email.includes('@')) {
                 document.getElementById('form-container').style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
-            } else { alert("Please enter a valid email."); }
+            } else alert("Please enter a valid email.");
         }
     </script>
 </body>
 
 </html>
-
