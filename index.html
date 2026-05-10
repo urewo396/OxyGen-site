@@ -7,18 +7,25 @@
     <title>OxyGen | The Future of CCU</title>
     <meta name="description"
         content="OxyGen transforms atmospheric CO2 into solid graphite using proprietary reaction cycles.">
-
     <link rel="icon" type="image/png" href="./logo.png?v=2">
 
     <style>
         :root {
             --primary-green: #1a5e3a;
-            --dark-green: #0a2113;
-            --accent-green: #2ecc71;
+            --dark-green: #07170f;
+            --accent-green: #7cf6b2;
+            --accent-green-strong: #2ecc71;
             --bg-white: #ffffff;
-            --bg-light: #f8fcf9;
-            --text-dark: #111111;
-            --text-grey: #555555;
+            --bg-light: #f3fbf6;
+            --bg-mist: #e6f5eb;
+            --text-dark: #08110c;
+            --text-grey: #567064;
+            --border-soft: rgba(8, 17, 12, 0.08);
+            --shadow-soft: 0 24px 60px rgba(7, 23, 15, 0.08);
+            --shadow-strong: 0 28px 80px rgba(7, 23, 15, 0.18);
+            --radius-lg: 28px;
+            --radius-md: 22px;
+            --max-width: 1200px;
         }
 
         * {
@@ -29,17 +36,106 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            overflow-x: hidden;
+        html {
+            background: var(--bg-white);
         }
 
-        /* --- SCROLL REVEAL --- */
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(124, 246, 178, 0.16), transparent 32%),
+                radial-gradient(circle at top right, rgba(26, 94, 58, 0.08), transparent 28%),
+                var(--bg-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        section,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        section[id] {
+            scroll-margin-top: 110px;
+        }
+
+        .content-shell {
+            width: min(var(--max-width), 100%);
+            margin: 0 auto;
+        }
+
+        .section-spacing {
+            padding: 8rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.3rem, 5vw, 3.7rem);
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            letter-spacing: -0.04em;
+        }
+
+        .section-header p {
+            color: var(--text-grey);
+            font-size: 1.1rem;
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.7rem 1.3rem;
+            background: rgba(26, 94, 58, 0.08);
+            color: var(--primary-green);
+            border: 1px solid rgba(26, 94, 58, 0.12);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .badge::before {
+            content: '';
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 50%;
+            background: var(--accent-green-strong);
+            box-shadow: 0 0 0 6px rgba(46, 204, 113, 0.14);
+        }
+
+        .eyebrow {
+            color: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .eyebrow::before {
+            box-shadow: 0 0 0 6px rgba(124, 246, 178, 0.12);
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -47,62 +143,155 @@
             transform: translateY(0);
         }
 
-        /* --- NAVIGATION --- */
         nav {
+            position: fixed;
+            top: 1.4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(calc(100% - 2rem), 1180px);
+            padding: 0.95rem 1.3rem;
+            border-radius: 999px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
-            position: absolute;
-            width: 100%;
-            top: 0;
+            gap: 1rem;
+            background: rgba(7, 23, 15, 0.56);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
             z-index: 100;
         }
 
         .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.9rem;
             color: white;
-            letter-spacing: -1px;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: -0.04em;
+        }
+
+        .logo-mark {
+            width: 2.55rem;
+            height: 2.55rem;
+            padding: 0.28rem;
+            border-radius: 50%;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .logo-copy {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+
+        .logo-copy span:last-child {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: 0.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: white;
-            margin-left: 2rem;
+            color: rgba(255, 255, 255, 0.86);
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
             font-size: 0.9rem;
-            font-weight: 500;
-            transition: opacity 0.3s;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
         }
 
-        .nav-links a:hover {
-            opacity: 0.8;
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateY(-1px);
+            outline: none;
         }
 
-        /* --- HERO --- */
+        .nav-links .nav-cta {
+            background: linear-gradient(135deg, var(--accent-green), #b2ffd1);
+            color: var(--dark-green);
+            box-shadow: 0 10px 24px rgba(124, 246, 178, 0.22);
+        }
+
         .hero {
-            height: 100vh;
+            min-height: 100vh;
+            padding: 9rem 5% 5rem;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(10, 33, 19, 0.5), rgba(10, 33, 19, 0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background:
+                linear-gradient(125deg, rgba(7, 23, 15, 0.92), rgba(7, 23, 15, 0.72) 48%, rgba(7, 23, 15, 0.4)),
+                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             color: white;
             position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(12px);
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 26rem;
+            height: 26rem;
+            top: -8rem;
+            right: -6rem;
+            background: radial-gradient(circle, rgba(124, 246, 178, 0.22), transparent 68%);
+        }
+
+        .hero::after {
+            width: 22rem;
+            height: 22rem;
+            bottom: -10rem;
+            left: -6rem;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.14), transparent 70%);
+        }
+
+        .hero-layout {
+            width: min(var(--max-width), 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.82fr);
+            align-items: end;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-copy {
+            max-width: 760px;
         }
 
         .brand-container {
-            font-size: 5rem;
+            font-size: clamp(3.8rem, 9vw, 6.8rem);
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin: 1.5rem 0 1.2rem;
             display: inline-flex;
             align-items: center;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            min-height: 1.2em;
+            text-shadow: 0 16px 45px rgba(0, 0, 0, 0.4);
+            min-height: 1.16em;
+            letter-spacing: -0.07em;
         }
 
         .cursor {
@@ -110,8 +299,8 @@
             width: 5px;
             height: 0.8em;
             background-color: var(--accent-green);
-            margin-left: 5px;
-            box-shadow: 0 0 10px var(--accent-green);
+            margin-left: 6px;
+            box-shadow: 0 0 16px var(--accent-green);
         }
 
         .blinking {
@@ -131,120 +320,236 @@
         }
 
         .sub-hero {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 3rem;
-            font-weight: 300;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-size: clamp(1.08rem, 2.2vw, 1.32rem);
+            color: rgba(255, 255, 255, 0.84);
+            margin-bottom: 2rem;
+            max-width: 42rem;
+            line-height: 1.7;
+            text-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-button,
+        .secondary-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.7rem;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3.5rem;
-            background: var(--accent-green);
+            background: linear-gradient(135deg, var(--accent-green), #caffdd);
             color: var(--dark-green);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 18px 40px rgba(124, 246, 178, 0.22);
         }
 
-        .cta-button:hover {
+        .secondary-button {
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .cta-button:hover,
+        .secondary-button:hover,
+        .cta-button:focus-visible,
+        .secondary-button:focus-visible {
             transform: translateY(-3px);
-            background: white;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            outline: none;
         }
 
-        /* --- SECTIONS GENERAL --- */
-        section {
-            padding: 8rem 10%;
+        .secondary-button:hover,
+        .secondary-button:focus-visible {
+            background: rgba(255, 255, 255, 0.14);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            max-width: 760px;
         }
 
-        .section-header h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-            letter-spacing: -1px;
+        .hero-stat {
+            padding: 1.2rem 1.25rem;
+            border-radius: 1.35rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
         }
 
-        .section-header p {
-            color: var(--text-grey);
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
+        .hero-stat strong {
+            display: block;
+            font-size: 1.35rem;
+            margin-bottom: 0.35rem;
+            letter-spacing: -0.04em;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(26, 94, 58, 0.1);
-            color: var(--primary-green);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
+        .hero-stat span {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .hero-panel {
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22);
+            backdrop-filter: blur(18px);
+            align-self: center;
+        }
+
+        .hero-panel-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.62);
+            margin-bottom: 0.8rem;
         }
 
-        /* --- SCIENCE CARDS --- */
+        .hero-panel h2 {
+            font-size: 2rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-panel p {
+            color: rgba(255, 255, 255, 0.74);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-points {
+            list-style: none;
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .hero-points li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.86);
+        }
+
+        .hero-points li::before {
+            content: '';
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-green), #dffff0);
+            box-shadow: 0 0 0 6px rgba(124, 246, 178, 0.1);
+            flex-shrink: 0;
+        }
+
         .science-section {
-            background-color: var(--bg-light);
-            text-align: center;
-            perspective: 1000px;
+            background: linear-gradient(180deg, var(--bg-light), #ffffff 72%);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.6rem;
         }
 
         .card {
-            padding: 3rem 2rem;
-            background: white;
-            border-top: 4px solid var(--primary-green);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
-            transition: transform 0.1s ease-out, box-shadow 0.3s;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(26, 94, 58, 0.1);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.12s ease-out, box-shadow 0.35s ease, border-color 0.35s ease;
             transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, rgba(124, 246, 178, 0.18), transparent 45%);
+            opacity: 0.75;
+            pointer-events: none;
         }
 
         .card:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 22px 48px rgba(7, 23, 15, 0.12);
+            border-color: rgba(26, 94, 58, 0.18);
+        }
+
+        .card-step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 50%;
+            background: rgba(26, 94, 58, 0.08);
+            color: var(--primary-green);
+            font-size: 0.92rem;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            transform: translateZ(30px);
         }
 
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.55rem;
+            margin-bottom: 0.9rem;
             color: var(--text-dark);
-            transform: translateZ(20px);
+            transform: translateZ(22px);
+            letter-spacing: -0.03em;
         }
 
         .card p {
             color: var(--text-grey);
-            line-height: 1.6;
-            transform: translateZ(10px);
+            line-height: 1.75;
+            transform: translateZ(12px);
         }
 
-        /* --- INTERACTIVE PHYSICS CANVAS --- */
         .interactive-container {
-            padding: 0;
-            height: 65vh;
-            background: #111;
+            padding: 0 5%;
+            background: linear-gradient(180deg, #08110c, #0e2216);
+        }
+
+        .interactive-shell {
+            width: min(var(--max-width), 100%);
+            margin: 0 auto;
+            min-height: 70vh;
+            border-radius: calc(var(--radius-lg) + 4px);
+            overflow: hidden;
             position: relative;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             cursor: crosshair;
+            box-shadow: var(--shadow-strong);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: radial-gradient(circle at top center, rgba(124, 246, 178, 0.14), transparent 32%), #08110c;
+        }
+
+        .interactive-shell::before {
+            content: '';
+            position: absolute;
+            inset: 1rem;
+            border-radius: calc(var(--radius-lg) - 8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+            z-index: 1;
         }
 
         canvas {
@@ -262,50 +567,74 @@
             text-align: center;
             pointer-events: none;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            max-width: 48rem;
+            padding: 0 1.5rem;
         }
 
         .interactive-text h3 {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
             margin-bottom: 1rem;
-            letter-spacing: -1px;
+            letter-spacing: -0.05em;
         }
 
         .interactive-text p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.12rem;
+            opacity: 0.86;
             font-weight: 300;
+            line-height: 1.8;
         }
 
-        /* --- MARKET / WHY GRAPHITE --- */
         .market-section {
-            background: white;
+            background: linear-gradient(180deg, #ffffff, var(--bg-light));
         }
 
         .market-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr);
+            gap: 4rem;
             align-items: center;
         }
 
-        .market-content {
-            padding-right: 2rem;
-        }
-
         .market-content h3 {
-            font-size: 2.8rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            margin: 1.2rem 0 1.4rem;
             color: var(--text-dark);
-            letter-spacing: -1.5px;
+            letter-spacing: -0.05em;
             font-weight: 800;
         }
 
         .market-content p {
             color: var(--text-grey);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-size: 1.15rem;
-            font-weight: 400;
+            line-height: 1.9;
+            margin-bottom: 1.3rem;
+            font-size: 1.06rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+            padding: 1rem 1.1rem;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 1rem;
+            border: 1px solid rgba(26, 94, 58, 0.08);
+            box-shadow: 0 14px 28px rgba(7, 23, 15, 0.04);
+        }
+
+        .feature-list li::before {
+            content: '↗';
+            color: var(--primary-green);
+            font-weight: 800;
+            font-size: 1rem;
+            line-height: 1;
+            margin-top: 0.18rem;
         }
 
         .market-visual {
@@ -315,49 +644,51 @@
 
         .market-img {
             width: 100%;
-            height: 450px;
+            height: 520px;
             object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-radius: calc(var(--radius-lg) + 4px);
+            box-shadow: 0 28px 70px rgba(7, 23, 15, 0.18);
         }
 
         .stat-box-floating {
             position: absolute;
-            bottom: -30px;
-            left: -30px;
-            background: var(--dark-green);
+            bottom: 1.5rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            background: rgba(7, 23, 15, 0.78);
             color: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(10, 33, 19, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.8rem;
+            border-radius: 1.35rem;
+            text-align: left;
+            box-shadow: 0 18px 40px rgba(10, 33, 19, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
         }
 
         .stat-number {
-            font-size: 3.5rem;
+            font-size: 3.1rem;
             font-weight: 800;
             color: var(--accent-green);
             display: block;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
             line-height: 1;
+            letter-spacing: -0.05em;
         }
 
         .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: 0.95rem;
+            opacity: 0.82;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.12em;
         }
 
-        /* --- ROADMAP (CLEAN & STATIC) --- */
         .roadmap-section {
-            background: var(--bg-light);
+            background: linear-gradient(180deg, var(--bg-light), #ecf8f0);
         }
 
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -367,15 +698,15 @@
             left: 50%;
             width: 2px;
             height: 100%;
-            background: #ddd;
+            background: linear-gradient(180deg, rgba(26, 94, 58, 0.18), rgba(26, 94, 58, 0.4), rgba(26, 94, 58, 0.18));
             transform: translateX(-50%);
         }
 
         .timeline-item {
-            margin-bottom: 3rem;
+            margin-bottom: 2.6rem;
             position: relative;
             width: 50%;
-            padding: 0 40px;
+            padding: 0 42px;
         }
 
         .timeline-item:nth-child(odd) {
@@ -390,80 +721,144 @@
 
         .timeline-dot {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--primary-green);
+            width: 18px;
+            height: 18px;
+            background: white;
             border-radius: 50%;
-            top: 0;
-            border: 4px solid white;
-            box-shadow: 0 0 0 2px var(--primary-green);
+            top: 1rem;
+            border: 4px solid var(--accent-green-strong);
+            box-shadow: 0 0 0 8px rgba(46, 204, 113, 0.12);
         }
 
         .timeline-item:nth-child(odd) .timeline-dot {
-            right: -10px;
+            right: -9px;
         }
 
         .timeline-item:nth-child(even) .timeline-dot {
-            left: -10px;
+            left: -9px;
+        }
+
+        .timeline-card {
+            padding: 1.7rem;
+            border-radius: 1.3rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(26, 94, 58, 0.08);
+            box-shadow: 0 16px 34px rgba(7, 23, 15, 0.05);
         }
 
         .timeline-date {
             color: var(--primary-green);
             font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.55rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
         }
 
-        /* --- VISUAL BANNER --- */
+        .timeline-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.55rem;
+            letter-spacing: -0.03em;
+        }
+
+        .timeline-card p {
+            color: var(--text-grey);
+            line-height: 1.7;
+        }
+
         .visual-banner {
-            padding: 0;
-            height: 40vh;
-            background: linear-gradient(rgba(26, 94, 58, 0.6), rgba(10, 33, 19, 0.8)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            padding: 6rem 5%;
+            background:
+                linear-gradient(135deg, rgba(7, 23, 15, 0.72), rgba(26, 94, 58, 0.6)),
+                url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             text-align: center;
+        }
+
+        .visual-banner-panel {
+            width: min(820px, 100%);
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border-radius: calc(var(--radius-lg) + 2px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
         }
 
         .visual-banner h2 {
             color: white;
-            font-size: 3.5rem;
-            letter-spacing: -1px;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            padding: 0 20px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            letter-spacing: -0.05em;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1rem;
         }
 
-        /* --- CALCULATOR --- */
+        .visual-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 42rem;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
         .calculator-section {
-            background: var(--primary-green);
+            background: linear-gradient(180deg, var(--primary-green), #0f3d26);
             color: white;
             text-align: center;
         }
 
         .calc-wrapper {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 4rem;
-            border-radius: 20px;
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            padding: 2.5rem;
+            border-radius: calc(var(--radius-lg) + 2px);
+            max-width: 860px;
             margin: 0 auto;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 26px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .calc-heading {
+            margin-bottom: 1rem;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            letter-spacing: -0.05em;
+        }
+
+        .calc-subcopy {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            line-height: 1.75;
+        }
+
+        .calc-topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            text-align: left;
+        }
+
+        .calc-topline span {
+            font-size: 1.06rem;
+        }
+
+        #unit-display {
+            font-weight: 700;
+            color: var(--accent-green);
         }
 
         .slider-container {
             width: 100%;
-            margin: 2.5rem 0;
+            margin: 2rem 0 2.2rem;
             position: relative;
         }
 
         input[type=range] {
             width: 100%;
-            height: 8px;
-            border-radius: 5px;
+            height: 10px;
+            border-radius: 999px;
             outline: none;
             -webkit-appearance: none;
             background: linear-gradient(to right, var(--accent-green) 0%, rgba(255, 255, 255, 0.2) 0%);
@@ -472,84 +867,111 @@
 
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             background: white;
             border: 4px solid var(--accent-green);
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
             transition: transform 0.1s;
         }
 
         input[type=range]::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .results-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .result-box {
+            padding: 1.6rem;
+            border-radius: 1.3rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: left;
         }
 
         .result-box h4 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
             font-weight: 800;
             margin-bottom: 0.5rem;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.05em;
         }
 
         .result-box span {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 0.85rem;
+            opacity: 0.78;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.14em;
         }
 
-        /* --- CONTACT --- */
         .contact-section {
-            background: white;
-            padding: 8rem 5%;
+            background: linear-gradient(180deg, #ffffff, #f1faf5);
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            max-width: 1000px;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+            gap: 1.4rem;
+            max-width: 1040px;
             margin: 0 auto;
         }
 
         .contact-box {
-            padding: 3rem;
-            border-radius: 20px;
+            padding: 2.2rem;
+            border-radius: calc(var(--radius-md) + 2px);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: #f8fcf9;
-            border: 1px solid #eee;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(26, 94, 58, 0.09);
+            box-shadow: 0 18px 40px rgba(7, 23, 15, 0.06);
+        }
+
+        .contact-box h3 {
+            font-size: 2rem;
+            margin-bottom: 0.9rem;
+            letter-spacing: -0.04em;
+        }
+
+        .contact-box p {
+            color: var(--text-grey);
+            line-height: 1.75;
         }
 
         .box-dark {
-            background: var(--dark-green);
+            background: linear-gradient(180deg, #0b1d13, var(--dark-green));
             color: white;
             border: none;
+            box-shadow: 0 24px 50px rgba(7, 23, 15, 0.2);
+        }
+
+        .box-dark p {
+            color: rgba(255, 255, 255, 0.74);
         }
 
         .input-group {
             display: flex;
-            border: 1px solid #ddd;
-            border-radius: 50px;
+            border: 1px solid rgba(8, 17, 12, 0.12);
+            border-radius: 999px;
             overflow: hidden;
             background: white;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            margin-top: 2rem;
         }
 
         .waitlist-input {
             flex: 1;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.3rem;
             border: none;
             outline: none;
+            font-size: 1rem;
         }
 
         .waitlist-btn {
@@ -557,96 +979,162 @@
             background: var(--text-dark);
             color: white;
             border: none;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .waitlist-btn:hover {
+        .waitlist-btn:hover,
+        .waitlist-btn:focus-visible {
             background: var(--primary-green);
+            outline: none;
+        }
+
+        .contact-note {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(8, 17, 12, 0.56);
         }
 
         .btn-wellfound {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             text-align: center;
             padding: 1rem;
             background: white;
             color: var(--dark-green);
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 999px;
             font-weight: 700;
-            margin-bottom: 1rem;
-            transition: transform 0.2s;
+            margin: 1.5rem 0 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
         }
 
-        .btn-wellfound:hover {
+        .btn-wellfound:hover,
+        .btn-wellfound:focus-visible {
             transform: translateY(-2px);
+            outline: none;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.2);
         }
 
         .link-email {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.72);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: color 0.2s;
         }
 
-        .link-email:hover {
+        .link-email:hover,
+        .link-email:focus-visible {
             color: white;
+            outline: none;
         }
 
         footer {
-            padding: 3rem;
+            padding: 2.2rem 5% 3rem;
             text-align: center;
             color: var(--text-grey);
-            font-size: 0.9rem;
-            background-color: #f4f4f4;
-            border-top: 1px solid #eee;
+            font-size: 0.92rem;
+            background-color: #eef7f1;
+            border-top: 1px solid rgba(26, 94, 58, 0.08);
         }
 
-        @media (max-width: 768px) {
-            .brand-container {
-                font-size: 2.5rem;
+        @media (max-width: 1024px) {
+            nav {
+                border-radius: 1.3rem;
+                top: 1rem;
+                width: min(calc(100% - 1.5rem), 1180px);
             }
 
+            .hero-layout,
             .market-grid,
-            .contact-grid,
-            .grid,
-            .results-grid {
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
 
-            .market-grid {
-                gap: 3rem;
+            .hero-panel {
+                max-width: 640px;
             }
 
-            .market-content {
-                padding-right: 0;
+            .market-img {
+                height: 440px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-spacing {
+                padding: 6rem 5%;
             }
 
-            .stat-box-floating {
-                position: relative;
-                bottom: 0;
-                left: 0;
-                margin-top: -50px;
-                width: 90%;
-                margin-left: auto;
-                margin-right: auto;
+            nav {
+                position: fixed;
+                padding: 1rem;
+                justify-content: center;
+                flex-direction: column;
             }
 
-            .hero,
-            .visual-banner {
-                background-attachment: scroll;
+            .logo {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-links {
+                gap: 0.25rem;
+            }
+
+            .nav-links a {
+                font-size: 0.84rem;
+                padding: 0.6rem 0.8rem;
+            }
+
+            .hero {
+                padding-top: 11rem;
+            }
+
+            .brand-container {
+                font-size: 2.9rem;
+            }
+
+            .hero-actions,
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-stat {
+                padding: 1rem 1.1rem;
+            }
+
+            .interactive-shell {
+                min-height: 58vh;
+            }
+
+            .results-grid,
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-topline {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .timeline::before {
-                left: 20px;
+                left: 18px;
             }
 
             .timeline-item {
                 width: 100%;
-                padding-left: 50px;
-                text-align: left !important;
+                padding-left: 52px;
                 padding-right: 0;
+                text-align: left !important;
             }
 
             .timeline-item:nth-child(odd),
@@ -655,15 +1143,46 @@
             }
 
             .timeline-dot {
-                left: 11px !important;
+                left: 9px !important;
+                right: auto;
             }
 
             .card {
                 transform: none !important;
             }
 
-            .visual-banner h2 {
-                font-size: 2.5rem;
+            .visual-banner {
+                padding: 4.5rem 5%;
+            }
+
+            .input-group {
+                flex-direction: column;
+                border-radius: 1.2rem;
+            }
+
+            .waitlist-btn {
+                padding: 1rem 1.5rem;
+            }
+
+            .stat-box-floating {
+                position: relative;
+                inset: auto;
+                margin-top: -3.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
             }
         }
     </style>
@@ -672,182 +1191,241 @@
 <body>
 
     <nav>
-        <div class="logo">OxyGen</div>
+        <div class="logo">
+            <img src="./logo.png" alt="OxyGen logo" class="logo-mark">
+            <div class="logo-copy">
+                <span>OxyGen</span>
+                <span>Carbon-to-Graphite</span>
+            </div>
+        </div>
         <div class="nav-links">
             <a href="#science">Technology</a>
             <a href="#market">Opportunity</a>
-            <a href="#contact">Contact</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#impact">Impact</a>
+            <a href="#contact" class="nav-cta">Contact</a>
         </div>
     </nav>
 
     <section class="hero" id="vision">
-        <div class="brand-container" id="typing-container"></div>
-        <p class="sub-hero">
-            Turning atmospheric threats into solid opportunity. <br>
-            The next generation of Carbon Capture & Utilization.
-        </p>
-        <a href="#science" class="cta-button">See The Vision</a>
+        <div class="hero-layout">
+            <div class="hero-copy reveal active">
+                <div class="badge eyebrow">Carbon Capture Reimagined</div>
+                <div class="brand-container" id="typing-container"></div>
+                <p class="sub-hero">
+                    Turning atmospheric threats into durable graphite, cleaner oxygen, and a more resilient battery supply
+                    chain.
+                </p>
+                <div class="hero-actions">
+                    <a href="#science" class="cta-button">Explore the Technology</a>
+                    <a href="#contact" class="secondary-button">Talk to the Team</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <strong>271 kg</strong>
+                        <span>Estimated CO2 removed per unit each year.</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>74 kg</strong>
+                        <span>Graphite output ready for critical battery markets.</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>1 mission</strong>
+                        <span>Convert carbon capture into something useful, scalable, and profitable.</span>
+                    </div>
+                </div>
+            </div>
+            <aside class="hero-panel reveal active">
+                <div class="hero-panel-label">What makes OxyGen different</div>
+                <h2>Climate tech with an industrial end market.</h2>
+                <p>Instead of stopping at capture, OxyGen pushes carbon one step further into a stable solid product that
+                    helps electrification scale faster.</p>
+                <ul class="hero-points">
+                    <li>Atmospheric CO2 becomes a high-value graphite feedstock.</li>
+                    <li>Research-led development with Silesian University of Technology.</li>
+                    <li>Designed to support the next generation of EV battery supply.</li>
+                </ul>
+            </aside>
+        </div>
     </section>
 
-    <section class="science-section reveal" id="science">
-        <div class="badge">Academic Partnership</div>
-        <div class="section-header">
-            <h2>Backed by Rigorous Research</h2>
-            <p>OxyGen is an engineered solution supported by research partners at the <strong>Silesian University of
-                    Technology</strong>. We bridge the gap between theoretical thermodynamics and real-world
-                application.</p>
-        </div>
+    <section class="science-section section-spacing reveal" id="science">
+        <div class="content-shell">
+            <div class="section-header">
+                <div class="badge">Academic Partnership</div>
+                <h2>Backed by rigorous research</h2>
+                <p>OxyGen is an engineered solution developed with research partners at the <strong>Silesian University of
+                        Technology</strong>, bridging theoretical thermodynamics with real-world deployment.</p>
+            </div>
 
-        <div class="grid">
-            <div class="card reveal tilt-card">
-                <h3>01. Extract</h3>
-                <p>Utilizing next-gen Direct Air Capture to pull CO2 straight from the sky. We target emissions at the
-                    source or from ambient air.</p>
-            </div>
-            <div class="card reveal tilt-card">
-                <h3>02. Convert</h3>
-                <p>Thermal reactions break molecular bonds. Carbon is separated, and pure Oxygen is released back into
-                    the environment.</p>
-            </div>
-            <div class="card reveal tilt-card">
-                <h3>03. Solidify</h3>
-                <p>The captured carbon is mineralized into graphite-a stable, profitable material essential for the
-                    battery industry.</p>
+            <div class="grid">
+                <div class="card reveal tilt-card">
+                    <div class="card-step">01</div>
+                    <h3>Extract</h3>
+                    <p>Use next-generation direct air capture to pull CO2 from ambient air or emission-heavy locations and
+                        prepare it for conversion.</p>
+                </div>
+                <div class="card reveal tilt-card">
+                    <div class="card-step">02</div>
+                    <h3>Convert</h3>
+                    <p>Thermal reaction cycles break molecular bonds so carbon can be separated while oxygen is returned to
+                        the environment.</p>
+                </div>
+                <div class="card reveal tilt-card">
+                    <div class="card-step">03</div>
+                    <h3>Solidify</h3>
+                    <p>Stabilize the carbon into graphite: a profitable, durable material that matters to energy storage and
+                        advanced manufacturing.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="interactive-container">
-        <div class="interactive-text">
-            <h3>From Gas to Solid.</h3>
-            <p>Hover to interact. We organize chaotic atmospheric CO2 into stable Graphite structures.</p>
+    <section class="interactive-container section-spacing">
+        <div class="interactive-shell">
+            <div class="interactive-text">
+                <div class="badge eyebrow">Interactive Process View</div>
+                <h3>From gas to solid.</h3>
+                <p>Move across the canvas to watch chaotic atmospheric CO2 organize into stable graphite-like structures.</p>
+            </div>
+            <canvas id="particleCanvas"></canvas>
         </div>
-        <canvas id="particleCanvas"></canvas>
     </section>
 
-    <section class="market-section reveal" id="market">
-        <div class="market-grid">
+    <section class="market-section section-spacing reveal" id="market">
+        <div class="content-shell market-grid">
             <div class="market-content">
                 <div class="badge">The Opportunity</div>
-                <h3>Why Graphite?</h3>
-                <p>
-                    The world is shifting to Electric Vehicles, but the battery supply chain is dirty.
-                    An EV battery contains significantly more Graphite than Lithium.
-                </p>
-                <p>
-                    Current graphite mining is highly carbon-intensive and vulnerable to supply shocks. OxyGen flips the
-                    script:
-                    we create <strong>Carbon-Negative Graphite</strong> by pulling the raw material directly from the
-                    air.
-                    It's not just a product; it's a solution to the battery bottleneck.
-                </p>
+                <h3>Why graphite, and why now?</h3>
+                <p>The EV transition is accelerating, but the battery supply chain is still resource-intensive and exposed to
+                    major supply shocks. Each battery pack depends on far more graphite than lithium.</p>
+                <p>OxyGen flips the script by creating <strong>carbon-negative graphite</strong> from captured atmospheric CO2,
+                    pairing emissions removal with a material the market already needs.</p>
+                <ul class="feature-list">
+                    <li>Reduce reliance on carbon-intensive mined graphite.</li>
+                    <li>Create value from captured carbon instead of treating it as waste.</li>
+                    <li>Position climate hardware inside a fast-growing battery ecosystem.</li>
+                </ul>
             </div>
             <div class="market-visual reveal">
                 <img src="https://images.unsplash.com/photo-1584351583369-6baf055b51a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80"
-                    alt="Dark Graphite Texture" class="market-img">
+                    alt="Dark graphite texture" class="market-img">
                 <div class="stat-box-floating">
                     <span class="stat-number">50 kg</span>
-                    <span class="stat-label">Graphite needed per EV Battery</span>
+                    <span class="stat-label">Average graphite demand in a single EV battery</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="roadmap-section reveal" id="roadmap">
-        <div class="section-header">
-            <h2>The Path Forward</h2>
-            <p>From university theory to global deployment.</p>
-        </div>
-        <div class="timeline">
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2025</div>
-                <div>
-                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Concept & Theory</h4>
-                    <p style="color: var(--text-grey); font-size: 0.95rem;">Validation of proprietary reaction cycles.
-                        Partnership with Silesian University of Technology.</p>
-                </div>
+    <section class="roadmap-section section-spacing reveal" id="roadmap">
+        <div class="content-shell">
+            <div class="section-header">
+                <div class="badge">Execution Path</div>
+                <h2>The path forward</h2>
+                <p>From university-backed theory to deployable hardware and scaled climate impact.</p>
             </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2026</div>
-                <div>
-                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Prototype V1</h4>
-                    <p style="color: var(--text-grey); font-size: 0.95rem;">Construction of the first functional unit.
-                        IP Protection strategy and efficiency testing.</p>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025</div>
+                        <h4>Concept &amp; theory</h4>
+                        <p>Validate proprietary reaction cycles and deepen the collaboration with Silesian University of
+                            Technology.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2027</div>
-                <div>
-                    <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Pilot Deployment</h4>
-                    <p style="color: var(--text-grey); font-size: 0.95rem;">Scaling to a commercial system. Field
-                        testing in industrial zones for maximum capture efficiency.</p>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">2026</div>
+                        <h4>Prototype V1</h4>
+                        <p>Build the first functional unit, protect the underlying IP, and test efficiency under real-world
+                            conditions.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">2027</div>
+                        <h4>Pilot deployment</h4>
+                        <p>Scale toward commercial systems and begin field testing in industrial settings for maximum capture
+                            efficiency.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="visual-banner reveal">
-        <h2>We don't just reduce emissions.<br>We reverse them.</h2>
+        <div class="visual-banner-panel">
+            <h2>We do not just reduce emissions. We reverse them.</h2>
+            <p>By turning captured carbon into a strategic material, OxyGen aims to make climate action feel tangible,
+                investable, and industrially relevant.</p>
+        </div>
     </section>
 
-    <section class="calculator-section reveal" id="impact">
-        <h2 style="margin-bottom: 1rem">Calculate The Impact</h2>
-        <p style="opacity: 0.8; margin-bottom: 2rem">See what happens when we scale.</p>
-        <div class="calc-wrapper">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                <span style="font-size: 1.1rem;">Scale of Deployment</span>
-                <span id="unit-display" style="font-weight: bold; color: var(--accent-green); font-size: 1.1rem;">1
-                    Unit</span>
-            </div>
-
-            <div class="slider-container">
-                <input type="range" min="1" max="1000000" value="1" id="unit-slider">
-            </div>
-
-            <div class="results-grid">
-                <div class="result-box">
-                    <h4 id="co2-result">271 KG</h4>
-                    <span>CO2 Removed / Year</span>
+    <section class="calculator-section section-spacing reveal" id="impact">
+        <div class="content-shell">
+            <h2 class="calc-heading">Calculate the impact</h2>
+            <p class="calc-subcopy">See how OxyGen scales from a single unit to large climate infrastructure deployments.</p>
+            <div class="calc-wrapper">
+                <div class="calc-topline">
+                    <span>Scale of deployment</span>
+                    <span id="unit-display">1 Unit</span>
                 </div>
-                <div class="result-box">
-                    <h4 id="graphite-result">74 KG</h4>
-                    <span>Graphite Created / Year</span>
+
+                <div class="slider-container">
+                    <input type="range" min="1" max="1000000" value="1" id="unit-slider">
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-box">
+                        <h4 id="co2-result">271 KG</h4>
+                        <span>CO2 removed / year</span>
+                    </div>
+                    <div class="result-box">
+                        <h4 id="graphite-result">74 KG</h4>
+                        <span>Graphite created / year</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact-section reveal" id="contact">
-        <div class="section-header">
-            <h2>Get Involved</h2>
-            <p>Whether you are an observer or a partner, join us.</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-box">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Join the Waitlist</h3>
-                <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">Be the first to see the prototype in
-                    action and receive quarterly research updates.</p>
-                <div class="input-group" id="form-container">
-                    <input type="email" class="waitlist-input" placeholder="Your Email" id="email-input">
-                    <button class="waitlist-btn" onclick="submitForm()">Join</button>
-                </div>
-                <p id="success-message"
-                    style="display: none; color: var(--primary-green); margin-top: 1rem; font-weight: 600;">
-                    Welcome to the future.
-                </p>
+    <section class="contact-section section-spacing reveal" id="contact">
+        <div class="content-shell">
+            <div class="section-header">
+                <div class="badge">Get Involved</div>
+                <h2>Join the next phase</h2>
+                <p>Whether you want to follow the research, back the prototype, or build with us, we would love to hear from
+                    you.</p>
             </div>
-            <div class="contact-box box-dark">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Work With Us</h3>
-                <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">We are looking for visionary engineers
-                    and investors to accelerate the transition to green graphite.</p>
-                <a href="https://wellfound.com/company/oxygen-5" target="_blank" class="btn-wellfound">
-                    Connect on Wellfound
-                </a>
-                <div style="text-align: center; margin-top: 1rem;">
-                    <a href="mailto:max@oxygencarbon.org" class="link-email">max@oxygencarbon.org</a>
+            <div class="contact-grid">
+                <div class="contact-box">
+                    <h3>Join the waitlist</h3>
+                    <p>Be the first to see the prototype in action and receive quarterly updates on research, milestones, and
+                        deployment progress.</p>
+                    <div class="input-group" id="form-container">
+                        <input type="email" class="waitlist-input" placeholder="Your email" id="email-input">
+                        <button class="waitlist-btn" onclick="submitForm()">Join</button>
+                    </div>
+                    <p id="success-message"
+                        style="display: none; color: var(--primary-green); margin-top: 1rem; font-weight: 700;">
+                        Welcome to the future.
+                    </p>
+                    <p class="contact-note">No spam. Just major product and research updates.</p>
+                </div>
+                <div class="contact-box box-dark">
+                    <h3>Work with us</h3>
+                    <p>We are looking for visionary engineers, researchers, and investors to help accelerate the transition to
+                        green graphite.</p>
+                    <a href="https://wellfound.com/company/oxygen-5" target="_blank" rel="noreferrer" class="btn-wellfound">
+                        Connect on Wellfound
+                    </a>
+                    <div style="text-align: center; margin-top: 0.8rem;">
+                        <a href="mailto:max@oxygencarbon.org" class="link-email">max@oxygencarbon.org</a>
+                    </div>
                 </div>
             </div>
         </div>
